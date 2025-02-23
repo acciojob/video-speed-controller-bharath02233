@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const video = document.querySelector(".viewer");
+    const video = document.querySelector(".player__video");
     const playButton = document.querySelector(".toggle");
     const progressBar = document.querySelector(".progress");
     const volumeControl = document.querySelector(".volume");
@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Rewind & Fast Forward
     function rewind() {
-        video.currentTime -= 10;
+        video.currentTime = Math.max(0, video.currentTime - 10);
     }
 
     function fastForward() {
-        video.currentTime += 25;
+        video.currentTime = Math.min(video.duration, video.currentTime + 25);
     }
 
     // Event Listeners
