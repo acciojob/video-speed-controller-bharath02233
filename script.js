@@ -1,9 +1,58 @@
-const inputs = document.querySelectorAll('.controls input');
+document.addEventListener("DOMContentLoaded", function() {
+    const video = document.querySelector(".viewer");
+    const playButton = document.querySelector(".toggle");
+    const progressBar = document.querySelector(".progress");
+    const volumeControl = document.querySelector(".volume");
+    const speedControl = document.querySelector(".playbackSpeed");
+    const rewindButton = document.querySelector(".rewind");
+    const fastForwardButton = document.querySelector(".fastForward");
 
-    function handleUpdate() {
-      const suffix = this.dataset.sizing || '';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    // Play/Pause Toggle
+    function togglePlay() {
+        if (video.paused) {
+            video.play();
+            playButton.textContent = "❚ ❚"; // Pause symbol
+        } else {
+            video.pause();
+            playButton.textContent = "►"; // Play symbol
+        }
     }
 
-    inputs.forEach(input => input.addEventListener('change', handleUpdate));
-    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    // Update Progress Bar
+    function updateProgress() {
+        progressBar.value = (video.currentTime / video.duration) * 100;
+    }
+
+    // Set Video Progress
+    function setProgress() {
+        video.currentTime = (progressBar.value / 100) * video.duration;
+    }
+
+    // Volume Control
+    function updateVolume() {
+        video.volume = volumeControl.value;
+    }
+
+    // Playback Speed Control
+    function updateSpeed() {
+        video.playbackRate = speedControl.value;
+    }
+
+    // Rewind & Fast Forward
+    function rewind() {
+        video.currentTime -= 10;
+    }
+
+    function fastForward() {
+        video.currentTime += 25;
+    }
+
+    // Event Listeners
+    playButton.addEventListener("click", togglePlay);
+    video.addEventListener("timeupdate", updateProgress);
+    progressBar.addEventListener("input", setProgress);
+    volumeControl.addEventListener("input", updateVolume);
+    speedControl.addEventListener("input", updateSpeed);
+    rewindButton.addEventListener("click", rewind);
+    fastForwardButton.addEventListener("click", fastForward);
+});

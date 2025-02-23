@@ -1,2 +1,40 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+}
 
-/* Your CSS Code here. */
+.player {
+    max-width: 800px;
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.viewer {
+    width: 100%;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+button {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+input {
+    margin: 5px;
+    width: 80%;
+}
